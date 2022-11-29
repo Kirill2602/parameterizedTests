@@ -57,7 +57,7 @@ public class CitilinkTest extends TestBase {
         $x("//span[text()='Оценка товара по отзывам']").scrollTo();
         $("div[data-meta-value='" + brand + "'] label").click();
         $$(".product_data__gtm-js.product_data__pageevents-js.ProductCardHorizontal.js--ProductCardInListing.js--ProductCardInWishlist")
-                .shouldHave(CollectionCondition.allMatch("Проверяем наличие названия бренда в заголовке в каждом элементе коллекции",
+                .shouldHave(CollectionCondition.allMatch("Проверяем наличие названия бренда в заголовке каждого элемента коллекции",
                         (element -> element.getText().contains(brand.toLowerCase().substring(1)))));
     }
 
@@ -71,7 +71,8 @@ public class CitilinkTest extends TestBase {
         $$("[name='input-max']").get(1).setValue(maxPrice);
         $$("[name='input-min']").get(1).click();
         refresh();
-        $$(".ProductCardHorizontal__price_current-price.js--ProductCardHorizontal__price_current-price").shouldHave(CollectionCondition.allMatch("",
+        $$(".ProductCardHorizontal__price_current-price.js--ProductCardHorizontal__price_current-price")
+                .shouldHave(CollectionCondition.allMatch("Проверяем, что цены в карточках товаров находятся в диапазоне указанных значений",
                 el -> Integer.parseInt(el.getText().replaceAll(" ", "")) >= Integer.parseInt(minPrice) &&
                         Integer.parseInt(el.getText().replaceAll(" ", "")) <= Integer.parseInt(maxPrice)));
     }
